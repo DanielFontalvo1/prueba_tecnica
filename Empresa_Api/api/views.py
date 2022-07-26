@@ -13,6 +13,7 @@ class EmpresaView(View):
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+    #metodo get que permite traer todos los registro o solo uno
     def get(self, request, id=0):
 
         if( id > 0):
@@ -31,6 +32,7 @@ class EmpresaView(View):
                 datos = {'message':"Empresas not found..."}
             return JsonResponse(datos)
 
+    #Metodo postque permite registrar una empresa
     def post(self, request):
         jdata = json.loads(request.body)
         Empresa.objects.create(nombre_empresa=jdata['nombre_empresa'], direccion=jdata['direccion'], 
@@ -38,6 +40,7 @@ class EmpresaView(View):
         datos = {'message':"Succes"}
         return JsonResponse(datos)
 
+    #Metodo put que permite actualizar un registro
     def put(self, request, id):
         jdata = json.loads(request.body)
         empresas = list(Empresa.objects.filter(id=id).values())
@@ -53,6 +56,7 @@ class EmpresaView(View):
             datos = {'message':"Empresas not found..."}
         return JsonResponse(datos)
 
+    #Metodo delete para eliminar un registro, recibe un id para poder eliminar este id en especifico
     def delete(self, request, id):
         empresas = list(Empresa.objects.filter(id=id).values())
         if len(empresas) > 0:
@@ -61,5 +65,6 @@ class EmpresaView(View):
         else:
             datos = {'message':"Empresas not found..."}
         return JsonResponse(datos)
-        
+    
+      
 

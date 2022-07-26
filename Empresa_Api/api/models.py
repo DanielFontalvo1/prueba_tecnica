@@ -1,7 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
+#Modelo de la tabla empresa.
 class Empresa(models.Model):
 
     nombre_empresa = models.CharField(max_length=50)
